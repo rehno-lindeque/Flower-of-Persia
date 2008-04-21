@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="debug (scons)" />
+	<File name="../../../common/common/math/vector4.h" open="1" top="0" tabpos="2">
+		<Cursor position="1841" topLine="46" />
+	</File>
+	<File name="../../../common/common/simd/sse2/vec4int.h" open="1" top="0" tabpos="1">
+		<Cursor position="1126" topLine="9" />
+	</File>
+	<File name="../scons/SConscript" open="1" top="0" tabpos="4">
+		<Cursor position="996" topLine="48" />
+	</File>
+	<File name="../scons/SConstargetscript" open="1" top="0" tabpos="5">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="../scons/SConstruct" open="1" top="0" tabpos="6">
+		<Cursor position="1180" topLine="21" />
+	</File>
+	<File name="../../src/camera.h" open="1" top="0" tabpos="10">
+		<Cursor position="2801" topLine="79" />
+	</File>
+	<File name="../../src/font.h" open="0" top="0" tabpos="0">
+		<Cursor position="179" topLine="0" />
+	</File>
+	<File name="../../src/main.cpp" open="1" top="1" tabpos="3">
+		<Cursor position="3892" topLine="110" />
+	</File>
+	<File name="../../src/models/heightmap.h" open="1" top="0" tabpos="7">
+		<Cursor position="4497" topLine="117" />
+	</File>
+	<File name="../../src/models/pool.h" open="1" top="0" tabpos="8">
+		<Cursor position="10634" topLine="209" />
+	</File>
+	<File name="../../src/scene.h" open="1" top="0" tabpos="9">
+		<Cursor position="10106" topLine="297" />
+	</File>
+</CodeBlocks_layout_file>
