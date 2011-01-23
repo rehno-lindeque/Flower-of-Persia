@@ -124,10 +124,18 @@ public:
         /*glRotatef(rotX, 0.0, 1.0, 0.0);
         glRotatef(rotY, 0.0, 0.0, 1.0);*/
 
+        //*
         cameraRotation = UnitQuaternion(Vector3(1.0f, 0.0f, 0.0f), Angle(pitch/180.0f*PI)) * UnitQuaternion(Vector3(0.0f, 1.0f, 0.0f), Angle(yaw/180.0f*PI));
-        /*glMultMatrixf((Matrix4)cameraRotation);*/
+        Matrix4 m;
+        cameraRotation.getTransformation(m);
+        glMultMatrixf(m);
+        std::cout << '[' << m(0,0) << ' ' << m(0,1) << ' ' << m(0,2) << ' ' << m(0,3) << std::endl
+                  << ' ' << m(1,0) << ' ' << m(1,1) << ' ' << m(1,2) << ' ' << m(1,3) << std::endl
+                  << ' ' << m(2,0) << ' ' << m(2,1) << ' ' << m(2,2) << ' ' << m(2,3) << std::endl
+                  << ' ' << m(3,0) << ' ' << m(3,1) << ' ' << m(3,2) << ' ' << m(3,3) << ']' << std::endl;
+        /*glMultMatrixf((Matrix4)cameraRotation);
         //std::cout << '[' << position(0) << ' ' << position(1) << ' ' << position(2) << ']';
-        glTranslatef(-position(0), -position(1), -position(2));
+        glTranslatef(-position(0), -position(1), -position(2));*/
 			  break;
       }
 		}
