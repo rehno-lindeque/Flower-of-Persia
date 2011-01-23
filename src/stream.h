@@ -28,7 +28,7 @@ public:
   Stream& operator << (const Stream<Type>& arg)
   {
     // copy original data
-    void* oldArray = array;
+    Type* oldArray = array;
     array = new Type[length + arg.length];
     memcpy(array, oldArray, length*sizeof(Type));
     if(dynamic)

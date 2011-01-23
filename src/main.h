@@ -13,6 +13,8 @@
   #include <GL/glut.h>
 #endif
 
+#include <cstring>
+
 extern bool showNormals;
 extern bool enableTextures;
 

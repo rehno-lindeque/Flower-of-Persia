@@ -14,10 +14,10 @@ public:
 
   Light(const float* diffuse, const float* position, const float* specular, const float* ambient, uint lightNum) : enabled(true), lightNum(lightNum)
   {
-    memcpy(Light::diffuse, diffuse, sizeof(float)*4);
-    memcpy(Light::position, position, sizeof(float)*4);
-    memcpy(Light::specular, specular, sizeof(float)*4);
-    memcpy(Light::ambient, ambient, sizeof(float)*4);
+    std::memcpy(Light::diffuse, diffuse, sizeof(float)*4);
+    std::memcpy(Light::position, position, sizeof(float)*4);
+    std::memcpy(Light::specular, specular, sizeof(float)*4);
+    std::memcpy(Light::ambient, ambient, sizeof(float)*4);
     range = 0.0f;
   }
 
