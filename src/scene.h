@@ -12,13 +12,14 @@ public:
     X_YZUVGenerator globalUVGenerator(1/4.0);
     uvMap0 = &globalUVGenerator;
 
-    /*//removed4debug:
+    pillar.build();
+    roomFloor.build();
+    /*removed4debug:
     pool.build();
     //railing.build(railShader.tangentLocation, railShader.binormalLocation);
-    railing.build(railShader.tangentLocation, railShader.binormalLocation);
-    roomFloor.build();
+    railing.build(railShader.tangentLocation, railShader.binormalLocation);    
     portal.build();
-    pillar.build();
+    
     pot.build();
     walls.build();
     roof.build();
@@ -54,7 +55,7 @@ public:
     cloths.push_back(&cloth3);
     cloths.push_back(&cloth4);
     cloths.push_back(&cloth5);
-    cloths.push_back(&cloth6);*/
+    cloths.push_back(&cloth6);//*/
   }
 
     struct comp_model_distance : public binary_function <Cloth*, Cloth*, bool>
@@ -169,80 +170,82 @@ public:
       // reset world view
       glPopMatrix();*/
 
-    /* render scene *
-      // set uv mapping
-      XZUVGenerator globalUVGenerator(1/8.0);
-      uvMap0 = &globalUVGenerator;
+    /* render scene */
+    // set uv mapping
+    XZUVGenerator globalUVGenerator(1/8.0);
+    uvMap0 = &globalUVGenerator;
 
-      // render static geometry
-      //glScalef(2.0f, 2.0f, 2.0f);
-      //glCallList(staticGeometry);
+    // render static geometry
+    //glScalef(2.0f, 2.0f, 2.0f);
+    //glCallList(staticGeometry);
 
-      // Cloth railings
-      if(enableTextures)
-        glBindTexture(GL_TEXTURE_2D, textures.get(0));
-      glBegin(GL_QUADS);
-        drawZCylinder(Vector3(-4.0f, 8.5f, -22.0f), 0.05f, 28.0f, 5);
-        drawZCylinder(Vector3( 4.0f, 8.5f, -22.0f), 0.05f, 28.0f, 5);
-      glEnd();
+    // Cloth railings
+    if(enableTextures)
+      glBindTexture(GL_TEXTURE_2D, textures.get(0));
+    glBegin(GL_QUADS);
+      drawZCylinder(Vector3(-4.0f, 8.5f, -22.0f), 0.05f, 28.0f, 5);
+      drawZCylinder(Vector3( 4.0f, 8.5f, -22.0f), 0.05f, 28.0f, 5);
+    glEnd();
 
-      //pillar.render();
-      /*glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-      railing.render();
-      glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT);
-      glColor3f(0.5f, 0.5f, 0.5f);
-      glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
-      //pot.render();*/
+    /*removed4debug:
+    pillar.render();
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+    railing.render();
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT);
+    glColor3f(0.5f, 0.5f, 0.5f);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+    //pot.render();*/
 
-      /*if(enableTextures)
-        glBindTexture(GL_TEXTURE_2D, textures.get(0));*/
-      //pool.render();
-      //portal.render();
+    /*if(enableTextures)
+      glBindTexture(GL_TEXTURE_2D, textures.get(0));*/
+    //pool.render();
+    //portal.render();
 
 
-      /*if(enableTextures)
-        glBindTexture(GL_TEXTURE_2D, textures.get(0));*
-      //glDisable(GL_TEXTURE_2D);
-      //perPixelDiffuseFragmentShader.activate();
-      //3621072
+    /*if(enableTextures)
+      glBindTexture(GL_TEXTURE_2D, textures.get(0));*
+    //glDisable(GL_TEXTURE_2D);
+    //perPixelDiffuseFragmentShader.activate();
+    //3621072
+    */
+    
+    floorShader.activate();
 
-      floorShader.activate();
+    // bind color texture to texture unit #0
+    floorShader.setTexture(0);
 
-        // bind color texture to texture unit #0
-        floorShader.setTexture(0);
+    /*// bind shadow map to texture unit #2
+    floorShader.setShadowmap(2);
+    glActiveTexture(GL_TEXTURE2);
+    glEnable(GL_TEXTURE_CUBE_MAP);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, light0Shadowmap.getTexture());
+    glActiveTexture(GL_TEXTURE0);*/
 
-        // bind shadow map to texture unit #2
-        floorShader.setShadowmap(2);
-        glActiveTexture(GL_TEXTURE2);
-        glEnable(GL_TEXTURE_CUBE_MAP);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, light0Shadowmap.getTexture());
+    pillar.render();
+    /*pot.render();
+    //if(enableTextures)
+      glBindTexture(GL_TEXTURE_2D, textures.get(0));
+    pool.render();
+    portal.render();
+    walls.render();*/
+    roomFloor.render();
+    /*steps.render();
+    roof.render();
+    arch.render();
+    singleDoor.render();
+    doubleDoor.render();
+    railShader.activate();
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glEnable(GL_BLEND);
+        glActiveTexture(GL_TEXTURE1);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, textures.get(9));
         glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textures.get(5));
 
-        pillar.render();
-        pot.render();
-        //if(enableTextures)
-          glBindTexture(GL_TEXTURE_2D, textures.get(0));
-        pool.render();
-        portal.render();
-        walls.render();
-        roomFloor.render();
-        steps.render();
-        roof.render();
-        arch.render();
-        singleDoor.render();
-        doubleDoor.render();
-      railShader.activate();
-        //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        //glEnable(GL_BLEND);
-          glActiveTexture(GL_TEXTURE1);
-          glEnable(GL_TEXTURE_2D);
-          glBindTexture(GL_TEXTURE_2D, textures.get(9));
-          glActiveTexture(GL_TEXTURE0);
-          glBindTexture(GL_TEXTURE_2D, textures.get(5));
-
-          railShader.setCameraPosition(camera.position);
-          railing.render();
-        //glDisable(GL_BLEND);
+        railShader.setCameraPosition(camera.position);
+        railing.render();
+      //glDisable(GL_BLEND);
       fogShader.activate();
         pool.renderBottom();
       shadowShader.activate();

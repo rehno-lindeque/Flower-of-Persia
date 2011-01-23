@@ -93,8 +93,8 @@ public:
 	{
     glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-    gluPerspective(33.0, width/(GLfloat)height, 0.01, 500.0);
-
+    //gluPerspective(33.0, width/(GLfloat)height, 0.01, 500.0);
+    gluPerspective(33.0, 800.f/600.f, 0.01, 500.0);
     /*glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();*/
 		switch(type)
@@ -125,7 +125,8 @@ public:
         glRotatef(rotY, 0.0, 0.0, 1.0);*/
 
         cameraRotation = UnitQuaternion(Vector3(1.0f, 0.0f, 0.0f), Angle(pitch/180.0f*PI)) * UnitQuaternion(Vector3(0.0f, 1.0f, 0.0f), Angle(yaw/180.0f*PI));
-        glMultMatrixf((Matrix4)cameraRotation);
+        /*glMultMatrixf((Matrix4)cameraRotation);*/
+        //std::cout << '[' << position(0) << ' ' << position(1) << ' ' << position(2) << ']';
         glTranslatef(-position(0), -position(1), -position(2));
 			  break;
       }
@@ -160,7 +161,9 @@ public:
 
   Vector3 getLookDirection() const
   {
-    return Vector3(0.0f, 0.0f, -1.0f).getTransform((Matrix4)-cameraRotation);
+    Matrix4 m;
+    (-cameraRotation).getTransformation(m);
+    return Vector3(0.0f, 0.0f, -1.0f).getTransform(m);
   }
 } camera;
 

@@ -12,6 +12,8 @@
 			<CompileFile command="scons -C ../scons -f $makefile $file" />
 			<Clean command="scons -C ../scons -f $makefile -c" />
 			<DistClean command="scons -C ../scons -f $makefile -c" />
+			<AskRebuildNeeded command="$make -q -f $makefile $target" />
+			<SilentBuild command="$make -s -f $makefile $target" />
 		</MakeCommands>
 		<Build>
 			<Target title="all (scons)">
@@ -31,6 +33,8 @@
 					<CompileFile command="scons -C ../scons -f $makefile $file" />
 					<Clean command="scons -C ../scons -f $makefile -c" />
 					<DistClean command="scons -C ../scons -f $makefile -c" />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -s -f $makefile $target" />
 				</MakeCommands>
 			</Target>
 			<Target title="all (make)">
@@ -50,9 +54,11 @@
 					<CompileFile command="make -C ../make $file" />
 					<Clean command="make -C ../make clean" />
 					<DistClean command="make -C ../make clean" />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -s -f $makefile $target" />
 				</MakeCommands>
 			</Target>
-			<Target title="debug (scons)">
+			<Target title="debugscons">
 				<Option output="../../bin/flowerofpersia" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../../../../flowerofpersia" />
 				<Option object_output="../../bin/" />
@@ -69,6 +75,8 @@
 					<CompileFile command="scons -C ../scons -f $makefile $file debug=1" />
 					<Clean command="scons -C ../scons -f $makefile -c debug=1" />
 					<DistClean command="scons -C ../scons -f $makefile -c debug=1" />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -s -f $makefile $target" />
 				</MakeCommands>
 			</Target>
 		</Build>

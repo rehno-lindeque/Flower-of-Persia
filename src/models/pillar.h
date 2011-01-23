@@ -49,6 +49,7 @@ public:
         }
       glEnd();
 
+      
       //glBindTexture(GL_TEXTURE_2D, textures.get(0));
       glBegin(GL_QUADS);
         for(int c = 0; c < 12; c++)
@@ -60,7 +61,8 @@ public:
           extrudeYCylinder(pillars[c], segments, rads, heights, 6);
           drawYCylinder(Vector3(0.0f, heights[6], 0.0f) + pillars[c], rads[6], pillarHeight-heights[6]*2.0f, segments);
           extrudeReverseYCylinder(Vector3(0.0f, pillarHeight, 0.0f) + pillars[c], segments, rads, heights, 6);
-          glBindTexture(GL_TEXTURE_2D, textures.get(0));
+          /*removed4debug: BUG (THIS SEEMS TO CRASH!)
+          glBindTexture(GL_TEXTURE_2D, textures.get(0));//*/
         }
       glEnd();      
       glPopMatrix();

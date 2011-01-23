@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="debug (scons)" />
+	<ActiveTarget name="debugscons" />
+	<File name="../../../common/common/float.h" open="1" top="0" tabpos="13">
+		<Cursor position="1680" topLine="17" />
+	</File>
+	<File name="../../../common/common/int.h" open="1" top="0" tabpos="14">
+		<Cursor position="962" topLine="1" />
+	</File>
+	<File name="../../../common/common/math (copy)/matrix4.hxx" open="1" top="0" tabpos="15">
+		<Cursor position="9141" topLine="304" />
+	</File>
 	<File name="../../../common/common/math/vector4.h" open="1" top="0" tabpos="2">
 		<Cursor position="1841" topLine="46" />
 	</File>
 	<File name="../../../common/common/simd/sse2/vec4int.h" open="1" top="0" tabpos="1">
 		<Cursor position="1126" topLine="9" />
+	</File>
+	<File name="../../../common/common/string.h" open="1" top="0" tabpos="11">
+		<Cursor position="2402" topLine="57" />
+	</File>
+	<File name="../../../common/common/types.h" open="1" top="0" tabpos="12">
+		<Cursor position="275" topLine="36" />
 	</File>
 	<File name="../scons/SConscript" open="1" top="0" tabpos="4">
 		<Cursor position="996" topLine="48" />
@@ -14,7 +29,7 @@
 		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="../scons/SConstruct" open="1" top="0" tabpos="6">
-		<Cursor position="1180" topLine="21" />
+		<Cursor position="262" topLine="0" />
 	</File>
 	<File name="../../src/camera.h" open="1" top="0" tabpos="10">
 		<Cursor position="2801" topLine="79" />
@@ -23,7 +38,7 @@
 		<Cursor position="179" topLine="0" />
 	</File>
 	<File name="../../src/main.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="3892" topLine="110" />
+		<Cursor position="131" topLine="0" />
 	</File>
 	<File name="../../src/models/heightmap.h" open="1" top="0" tabpos="7">
 		<Cursor position="4497" topLine="117" />
@@ -32,6 +47,6 @@
 		<Cursor position="10634" topLine="209" />
 	</File>
 	<File name="../../src/scene.h" open="1" top="0" tabpos="9">
-		<Cursor position="10106" topLine="297" />
+		<Cursor position="10084" topLine="297" />
 	</File>
 </CodeBlocks_layout_file>

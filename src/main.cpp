@@ -32,6 +32,7 @@ bool showWireframe = false;
 bool showNormals = false;
 bool enableTextures = true;
 bool highDetailCloth = false;
+bool enableMouse = false;
 
 // globals
 //AttenuatedDiffuseShader<2, QUADRATIC> floorShader;
@@ -48,19 +49,19 @@ ShadowdepthShader shadowdepthShader;
 UVGenerator* uvMap0;
 UVGenerator* uvMap1;
 
-/*//removed4debug:
-Wind wind;
-Gravity gravity;
-Avatar avatar;
 Camera camera;
-Textures textures;
+Avatar avatar;
 Light light0(Vector4(0.7f*2.0f, 0.7f*2.0f, 0.65f*2.0f, 1.0f), Vector4(0.0f, 5.0f, -20.0f, 1.0f), Vector4(1.0f, 1.0f, 0.9f, 1.0f), Vector4(0.0006f,   0.0006f, 0.00055f, 1.0f), 0);
 Light light1(Vector4(0.2f*2.0f, 0.5f*2.0f,  0.7f*2.0f, 1.0f), Vector4(0.0f,  9.5f,   0.0f, 1.0f), Vector4(0.5f, 0.9f, 1.0f, 1.0f), Vector4(0.00002f, 0.00007f, 0.00009f, 1.0f), 1);
-Pool pool;
+Textures textures;
+Wind wind;
+Gravity gravity;
+Pillar pillar;
 Floor roomFloor;
+/*removed4debug:
+Pool pool;
 Railing railing;
 Portal portal;
-Pillar pillar;
 Walls walls;
 Roof roof;
 Steps steps;
@@ -74,9 +75,12 @@ Cloth cloth3(Vector3(-4.1f, 8.5f, -28.5f), 12, 12, 6.0f, 6.0f, 10.0f);
 Cloth cloth4(Vector3( 4.1f, 8.5f, -12.5f), 12, 12, 6.0f, 6.0f, 10.0f);
 Cloth cloth5(Vector3( 4.1f, 8.5f, -20.5f), 12, 12, 6.0f, 6.0f, 10.0f);
 Cloth cloth6(Vector3( 4.1f, 8.5f, -28.5f), 12, 12, 6.0f, 6.0f, 10.0f);
+*/
+
 Keyboard keyboard;
 Mouse mouse;
 
+/* removed4debug:
 //Cubemap light0Shadowmap;
 Shadowmap light0Shadowmap;
 Shadowmap light1Shadowmap;
@@ -87,7 +91,7 @@ float tempH = 0.0f;
 CubemapProjectShader viewCubeShader;
 ViewCube viewCube;
 Cubemap viewCubeCubemap;
-CubeFrameBuffer viewCubeRenderFrame;*/
+CubeFrameBuffer viewCubeRenderFrame;//*/
 
 
 #include "scene.h"
@@ -99,7 +103,8 @@ Font font;
 float fps;
 void display(void)
 {
-	//removed4debug: camera.update();
+	//*removed4debug: 
+  camera.update();//*/
 
 #ifdef ACCURATE_FPS
   glClear(GL_DEPTH_BUFFER_BIT);
@@ -108,10 +113,12 @@ void display(void)
 #endif
 
 
+  /* testing:
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(33.0, 800.f/600.f, 0.01, 500.0);
+  gluPerspective(33.0, 800.f/600.f, 0.01, 500.0);//*/
 
+  //*
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   glColor3f(1.0,1.0,1.0);		// White colour
@@ -121,14 +128,15 @@ void display(void)
     glVertex3f(-0.5f, 0.5f, -10.f);
     glVertex3f(0.5f,  0.5f, -10.f);
     glVertex3f(0.f,  -0.5f, -10.f);
-  glEnd();
+  glEnd();//*/
 
   scene.render();
 
   // draw fps
   if(showFPS)
   {
-    // removed4debug: camera.orthoMode();
+    //* removed4debug: 
+    camera.orthoMode();//*/
     glDisable(GL_TEXTURE_2D);
     glDisable(GL_LIGHTING);
     //glColor3f(1.0,1.0,1.0);		// White colour
@@ -144,7 +152,8 @@ void display(void)
     if(enableTextures)
       glEnable(GL_TEXTURE_2D);
     glEnable(GL_LIGHTING);
-    //camera.projectionMode();
+    //* removed4debug: 
+    camera.projectionMode();//*/
   }
 
 #ifdef ACCURATE_FPS
@@ -186,7 +195,7 @@ void myinit()
   //glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 
 
-  /*//removed4debug:
+  //*removed4debug:
 
   glEnable(GL_COLOR_MATERIAL);
   glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT);// set scene ambient color
@@ -223,6 +232,7 @@ void myinit()
   // set up render targets
   //light0renderFrame.create(light0Shadowmap.getTexture());
 
+  /* removed:
   // set up (temp) view-cube
   viewCube.build();
   //viewCubeCubemap.build(GL_RGBA, GL_RGBA, GL_FLOAT); //  WRONG!!
@@ -238,7 +248,7 @@ void myinit()
   //maskShader.build();
   railShader.build();
   clothShader.build();
-  shadowdepthShader.build();
+  shadowdepthShader.build();//*/
 
   /*floorShader.setTexture(textures.get(0));
   fogShader.setTexture(textures.get(2));
@@ -248,7 +258,8 @@ void myinit()
   //Shader::restoreFixedFunction();
 
   // set up display lists
-  //removed4debug: scene.build();
+  //*removed4debug: 
+  scene.build();//*/
   oldTime = Time::getCounter();
 }
 
@@ -275,9 +286,12 @@ void keyInput(unsigned char key, int x, int y)
   }
 
   //keyboard.clear();
-  //removed4debug: keyboard.keys[key] = true;
+  //*removed4debug: 
+  keyboard.keys[key] = true;//*/
+  
+  //cout << "Key: " << key;
 
-  /*switch(key)
+  switch(key)
 	{
   case ' ':
     if(camera.type == Camera::THIRD_PERSON)
@@ -289,18 +303,25 @@ void keyInput(unsigned char key, int x, int y)
     break;
   case 'f': camera.followDistance += 0.5; break;
   case 'r': if(camera.followDistance > 0.5f) camera.followDistance -= 0.5; break;
-	}*/
+  case 'm': enableMouse = !enableMouse;
+	}
 }
 
 void idle(void)
 {
-  /*//removed4debug:
+  //*removed4debug:
   // handle keyboard input
   if(keyboard.keys['w'])
   {
+    //std::cout << '[' << avatar.position(0) << ' ' << avatar.position(1) << ' ' << avatar.position(2) << ']';
+
+    //cout << "forward";
     // move forward
     avatar.position += camera.getLookDirection()*0.66f;
     keyboard.keys['w'] = false;
+
+    //std::cout << '[' << avatar.position(0) << ' ' << avatar.position(1) << ' ' << avatar.position(2) << ']' << std::endl;
+    //std::cout << "rotation: " << '[' << camera.cameraRotation(0) << ' ' << camera.cameraRotation(1) << ' ' << camera.cameraRotation(2) << ' ' << camera.cameraRotation(3) << ']' << std::endl;
   }
 
   if(keyboard.keys['s'])
@@ -323,7 +344,9 @@ void idle(void)
   camera.yawLeftRight(mouse.x/5.0f);
   camera.pitchUpDown(mouse.y/5.0f);
   mouse.x = mouse.y = 0;
-  //removed4debug: glutWarpPointer(windowWidth/2, windowHeight/2);
+  //*removed4debug: 
+  if(!enableMouse)
+    glutWarpPointer(windowWidth/2, windowHeight/2);//*/
 
   // update time & fps
   uint64 currentTime = Time::getCounter();
@@ -338,7 +361,7 @@ void idle(void)
   if(frameTime > 0.03f)
     frameTime = 0.03f; //fixes the delay bug (e.g. right-click, startup)
 
-  /* //removed4debug:
+  /* removed4debug:
   // update physics
   wind.update();
   gravity.update();
@@ -371,15 +394,15 @@ void idle(void)
 
 void motion(int x, int y)
 {
-  /*//removed4debug:
+  //*removed4debug:
   mouse.x = x - windowWidth/2;
-  mouse.y = y - windowHeight/2;*/
+  mouse.y = y - windowHeight/2;//*/
 }
 
 
 void demo_menu(int id)
 {
-	/*//removed4debug:
+	//* removed4debug:
 	switch(id)
 	{
 	case 1:
@@ -475,8 +498,8 @@ void demo_menu(int id)
     else
       glutChangeToMenuEntry(10, "Low detail Cloth", 10);
     highDetailCloth = !highDetailCloth;
-    break;
-	}*/
+    break;//*/
+	}
   oldTime = Time::getCounter();
 }
 
@@ -522,7 +545,7 @@ int main(int argc, char **argv)
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 	myinit();
-  glutFullScreen();
+  //glutFullScreen();
   glutWarpPointer(windowWidth/2, windowHeight/2);
   oldTime = Time::getCounter();
   glutMainLoop();
