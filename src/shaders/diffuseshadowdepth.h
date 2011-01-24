@@ -61,7 +61,6 @@ const char* diffuseShadowdepthFragmentProgram2Lights =
 "    gl_FragColor = DiffuseColor * vec4(light1_diffuse + light2_diffuse, 1.0);\n"
 "  else\n"
 "    gl_FragColor = DiffuseColor * vec4(light2_diffuse, 1.0);\n"
-"  gl_FragColor = vec4(0.0,0.0,0.0,0.0);\n"
 "}";
 
 template<int lights = 2, Attenuation attenuation = QUADRATIC>

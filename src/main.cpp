@@ -172,9 +172,9 @@ void myinit()
 	glClearColor(0.2f, 0.2f, 0.3f, 0.0f);
 	//glClearDepth(0.0f);
 	glEnable(GL_DEPTH_TEST);
-	//removed4debug: glLineWidth(2.0);
-	//removed4debug:glEnable(GL_CULL_FACE);
-	glDisable(GL_CULL_FACE);
+  glLineWidth(2.0);
+	glEnable(GL_CULL_FACE);
+	//glDisable(GL_CULL_FACE);
 
   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
@@ -188,7 +188,7 @@ void myinit()
   //glShadeModel(GL_FLAT);
   glShadeModel(GL_SMOOTH);
 	//glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
-	//removed4debug: glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHTING);
   //glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 
 
@@ -229,7 +229,7 @@ void myinit()
   // set up render targets
   //light0renderFrame.create(light0Shadowmap.getTexture());
 
-  /* removed4debug:
+  //* removed4debug:
   // set up (temp) view-cube
   viewCube.build();
   //viewCubeCubemap.build(GL_RGBA, GL_RGBA, GL_FLOAT); //  WRONG!!
@@ -262,7 +262,8 @@ void myinit()
   cout << "Done" << endl;
   //*/
 
-  /*floorShader.setTexture(textures.get(0));
+  /*
+  floorShader.setTexture(textures.get(0));
   fogShader.setTexture(textures.get(2));
   shadowShader.setTexture(textures.get(7));
   shadowShader.setShadowTexture(textures.get(8));
@@ -282,7 +283,7 @@ void changeParentWindow(GLsizei width, GLsizei height)
 	if(height == 0)
     height = 1;
 	glViewport(0, 0, width, height);
-	//removed4debug: camera.setBounds(width, height);
+	camera.setBounds(width, height);
   windowWidth = width;
   windowHeight = height;
   glLoadIdentity();
@@ -373,7 +374,7 @@ void idle(void)
   if(frameTime > 0.03f)
     frameTime = 0.03f; //fixes the delay bug (e.g. right-click, startup)
 
-  /* removed4debug:
+  //* removed4debug:
   // update physics
   wind.update();
   gravity.update();
@@ -398,7 +399,7 @@ void idle(void)
       cloth6.update(frameTime);
     }
   }
-  pool.update();*/
+  pool.update();//*/
 
   // update display
   glutPostRedisplay();
@@ -407,8 +408,6 @@ void idle(void)
 void motion(int x, int y)
 {
   //*removed4debug:
-  //mouse.x = x - windowWidth/2;
-  //mouse.y = y - windowHeight/2
   mouse.x += x - windowWidth/2;
   mouse.y += y - windowHeight/2;//*/
 }

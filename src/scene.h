@@ -95,7 +95,7 @@ public:
     // render ViewCube (temp)
 
 
-    /*removed4debug:
+    //*removed4debug:
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -127,7 +127,7 @@ public:
       gluPerspective(90.0, 1.0, 0.01, 500.0);
       glTranslatef(0.0, tempH, 0.0);
       glRotatef(180.0, 0.0, 1.0, 0.0);
-      glRotatef(90.0, 1.0, 0.0, 0.0);*
+      glRotatef(90.0, 1.0, 0.0, 0.0);*/
       //glRotatef(180.0, 0.0, 1.0, 0.0);
       //glRotatef(90.0, 0.0, 1.0, 0.0);
       glRotatef(90.0, 0.0, 0.0, 1.0);
