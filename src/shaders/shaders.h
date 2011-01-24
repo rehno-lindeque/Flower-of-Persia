@@ -127,6 +127,14 @@ public:
     glCompileShader(vertexShaderObject);
     glCompileShader(fragmentShaderObject);
 
+    GLint status;
+    glGetShaderiv(vertexShaderObject, GL_COMPILE_STATUS, &status);
+    if(status == GL_FALSE)
+      cout << "Failed to compile vertex shader..." << std::endl;
+    glGetShaderiv(fragmentShaderObject, GL_COMPILE_STATUS, &status);
+    if(status == GL_FALSE)
+      cout << "Failed to compile fragment shader..." << std::endl;
+
     glAttachShader(programObject, vertexShaderObject);
     glAttachShader(programObject, fragmentShaderObject);
 

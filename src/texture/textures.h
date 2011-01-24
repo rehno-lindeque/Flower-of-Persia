@@ -49,7 +49,8 @@ public:
 	  glGenTextures(N_TEXTURES, textures);
 
 	  for(int c = 0; c < N_TEXTURES; c++)
-		  loadTexture(FILENAMES[c], c);
+		  if(!loadTexture(FILENAMES[c], c))
+        cout << "Failed to load texture " << FILENAMES[c] << std::endl;
   }
 
   inline GLuint get(int index) const { return textures[index]; }

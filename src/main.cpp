@@ -20,7 +20,7 @@ GLint windowWidth = 1280, windowHeight = 1024; // Window dimensions
 const int RANGE_MULTIPLIER = 1;
 const float WORLD_RANGE = 20.0 * RANGE_MULTIPLIER;
 const int Textures::N_TEXTURES = 10;
-const char* Textures::FILENAMES[] = { "../data/SandStone12.tga", "../data/fountainfloor03.tga", "../data/fountainsides02.tga", "../data/water02.tga", "../data/cloth.tga", "../data/rail.tga", "../data/railtop.tga", "../data/tile4.tga", "../data/lightmap.tga", "../data/railnormal.tga" };
+const char* Textures::FILENAMES[] = { "data/sandstone12.tga", "data/fountainfloor03.tga", "data/fountainsides02.tga", "data/water02.tga", "data/cloth.tga", "data/rail.tga", "data/railtop.tga", "data/tile4.tga", "data/lightmap.tga", "data/railnormal.tga" };
 
 double Cloth::Spring::tensionTensileConst;
 double Cloth::Spring::shearTensileConst;
@@ -49,19 +49,19 @@ ShadowdepthShader shadowdepthShader;
 UVGenerator* uvMap0;
 UVGenerator* uvMap1;
 
-Camera camera;
-Avatar avatar;
-Light light0(Vector4(0.7f*2.0f, 0.7f*2.0f, 0.65f*2.0f, 1.0f), Vector4(0.0f, 5.0f, -20.0f, 1.0f), Vector4(1.0f, 1.0f, 0.9f, 1.0f), Vector4(0.0006f,   0.0006f, 0.00055f, 1.0f), 0);
-Light light1(Vector4(0.2f*2.0f, 0.5f*2.0f,  0.7f*2.0f, 1.0f), Vector4(0.0f,  9.5f,   0.0f, 1.0f), Vector4(0.5f, 0.9f, 1.0f, 1.0f), Vector4(0.00002f, 0.00007f, 0.00009f, 1.0f), 1);
-Textures textures;
+//* removed4debug:
 Wind wind;
 Gravity gravity;
-Pillar pillar;
-Floor roomFloor;
-/*removed4debug:
+Avatar avatar;
+Camera camera;
+Textures textures;
+Light light0(Vector4(0.7f*2.0f, 0.7f*2.0f, 0.65f*2.0f, 1.0f), Vector4(0.0f, 5.0f, -20.0f, 1.0f), Vector4(1.0f, 1.0f, 0.9f, 1.0f), Vector4(0.0006f,   0.0006f, 0.00055f, 1.0f), 0);
+Light light1(Vector4(0.2f*2.0f, 0.5f*2.0f,  0.7f*2.0f, 1.0f), Vector4(0.0f,  9.5f,   0.0f, 1.0f), Vector4(0.5f, 0.9f, 1.0f, 1.0f), Vector4(0.00002f, 0.00007f, 0.00009f, 1.0f), 1);
 Pool pool;
+Floor roomFloor;
 Railing railing;
 Portal portal;
+Pillar pillar;
 Walls walls;
 Roof roof;
 Steps steps;
@@ -75,12 +75,9 @@ Cloth cloth3(Vector3(-4.1f, 8.5f, -28.5f), 12, 12, 6.0f, 6.0f, 10.0f);
 Cloth cloth4(Vector3( 4.1f, 8.5f, -12.5f), 12, 12, 6.0f, 6.0f, 10.0f);
 Cloth cloth5(Vector3( 4.1f, 8.5f, -20.5f), 12, 12, 6.0f, 6.0f, 10.0f);
 Cloth cloth6(Vector3( 4.1f, 8.5f, -28.5f), 12, 12, 6.0f, 6.0f, 10.0f);
-*/
-
 Keyboard keyboard;
 Mouse mouse;
 
-/* removed4debug:
 //Cubemap light0Shadowmap;
 Shadowmap light0Shadowmap;
 Shadowmap light1Shadowmap;
@@ -118,7 +115,7 @@ void display(void)
   glLoadIdentity();
   gluPerspective(33.0, 800.f/600.f, 0.01, 500.0);//*/
 
-  //*
+  /*
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   glColor3f(1.0,1.0,1.0);		// White colour
@@ -232,14 +229,14 @@ void myinit()
   // set up render targets
   //light0renderFrame.create(light0Shadowmap.getTexture());
 
-  /* removed:
+  /* removed4debug:
   // set up (temp) view-cube
   viewCube.build();
   //viewCubeCubemap.build(GL_RGBA, GL_RGBA, GL_FLOAT); //  WRONG!!
   //viewCubeCubemap.build(GL_RGB16\32F_ARB, GL_FLOAT); // requires GL_ARB_texture_float extension
   viewCubeCubemap.build(GL_RGBA16F_ARB, GL_RGBA, GL_FLOAT); // requires GL_ARB_texture_float extension
   viewCubeRenderFrame.create(viewCubeCubemap.getTexture());
-  viewCubeShader.build();
+  viewCubeShader.build();//*/
 
   // set up shaders
   floorShader.build();
