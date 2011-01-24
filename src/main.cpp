@@ -395,8 +395,10 @@ void idle(void)
 void motion(int x, int y)
 {
   //*removed4debug:
-  mouse.x = x - windowWidth/2;
-  mouse.y = y - windowHeight/2;//*/
+  //mouse.x = x - windowWidth/2;
+  //mouse.y = y - windowHeight/2
+  mouse.x += x - windowWidth/2;
+  mouse.y += y - windowHeight/2;//*/
 }
 
 
