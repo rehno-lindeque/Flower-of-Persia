@@ -52,8 +52,16 @@ protected:
     Vector3 nv = Vector3::cross(v1, v2).normalize();
 
     // calculate tangent and binormal
-    Vector3 tv = ((Vector3)point2 - (Vector3)point1).normalize();
+    Vector3 tv = (Vector3(point2) - Vector3(point1)).normalize();
     Vector3 bnv(0.0, 0.0, 1.0);
+
+    /*cout << v1.x << ' ' << v1.y << ' ' << v1.z << std::endl;
+    cout << v2.x << ' ' << v2.y << ' ' << v2.z << std::endl; 
+    cout << nv.x << ' ' << nv.y << ' ' << nv.z << std::endl;
+    cout << tv.x << ' ' << tv.y << ' ' << tv.z << std::endl;
+    cout << bnv.x << ' ' << bnv.y << ' ' << bnv.z << std::endl;
+    cout << tangentIndex << std::endl;
+    cout << binormalIndex << std::endl;*/
 
     //draw
     glNormal3fv(nv); // normal
@@ -129,7 +137,7 @@ public:
         // draw pool railing
         Y_XZUVGenerator uvGenerator1(1.0f);
         uvMap0 = &uvGenerator1;
-        extrudeYShape((float*)rail, 6, 1.0f);
+        extrudeYShape(*rail, 6, 1.0f);
 
         //draw platform railing
         Y_XZUVGenerator uvGenerator2(0.5484f);

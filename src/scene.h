@@ -185,7 +185,7 @@ public:
       drawZCylinder(Vector3( 4.0f, 8.5f, -22.0f), 0.05f, 28.0f, 5);
     glEnd();
 
-    /*removed4debug:
+    /*
     pillar.render();
     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
     railing.render();
@@ -231,7 +231,8 @@ public:
     arch.render();
     singleDoor.render();
     doubleDoor.render();
-    /*railShader.activate();
+    /* removed4debug: 
+    railShader.activate();
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //glEnable(GL_BLEND);
       glActiveTexture(GL_TEXTURE1);
@@ -241,7 +242,7 @@ public:
       glBindTexture(GL_TEXTURE_2D, textures.get(5));
 
       railShader.setCameraPosition(camera.position);
-      railing.render();
+      railing.render();//*/
     //glDisable(GL_BLEND);
     fogShader.activate();
     pool.renderBottom();
@@ -273,8 +274,8 @@ public:
     glColor4f(1.0f, 1.0f, 1.0f, 0.8f);
     if(enableTextures)
       glBindTexture(GL_TEXTURE_2D, textures.get(4));
+      cout <<"render cloth";
 
-      clothShader.activate();
         clothShader.setCameraPosition(camera.position);
         glBegin(GL_QUADS);
           renderCloths();
@@ -308,37 +309,37 @@ public:
     glDisable(GL_BLEND);
   }
 
-    /* render normals *
-      if(showNormals)
-      {
-        glDisable(GL_TEXTURE_2D);
-        glDisable(GL_LIGHTING);
-        glColor3f(1.0f, 0.0f, 0.0f);
-        pool.renderNormals();
-        railing.renderNormals();
-        portal.renderNormals();
-        pillar.renderNormals();
-        walls.renderNormals();
-        roomFloor.renderNormals();
-        steps.renderNormals();
-        roof.renderNormals();
-        arch.renderNormals();
-        singleDoor.renderNormals();
-        doubleDoor.renderNormals();
-        //pot.renderNormals
-        glBegin(GL_LINES);
-          cloth1.renderNormals();
-          cloth2.renderNormals();
-          cloth3.renderNormals();
-          cloth4.renderNormals();
-          cloth5.renderNormals();
-          cloth6.renderNormals();
-        glEnd();
-        glEnable(GL_LIGHTING);
-        if(enableTextures)
-          glEnable(GL_TEXTURE_2D);
-      }*/
-    }
+    /* render normals */
+    if(showNormals)
+    {
+      glDisable(GL_TEXTURE_2D);
+      glDisable(GL_LIGHTING);
+      glColor3f(1.0f, 0.0f, 0.0f);
+      pool.renderNormals();
+      railing.renderNormals();
+      portal.renderNormals();
+      pillar.renderNormals();
+      walls.renderNormals();
+      roomFloor.renderNormals();
+      steps.renderNormals();
+      roof.renderNormals();
+      arch.renderNormals();
+      singleDoor.renderNormals();
+      doubleDoor.renderNormals();
+      //pot.renderNormals
+      glBegin(GL_LINES);
+        cloth1.renderNormals();
+        cloth2.renderNormals();
+        cloth3.renderNormals();
+        cloth4.renderNormals();
+        cloth5.renderNormals();
+        cloth6.renderNormals();
+      glEnd();
+      glEnable(GL_LIGHTING);
+      if(enableTextures)
+        glEnable(GL_TEXTURE_2D);
+    }//*/
+  }
 };
 
 #endif
