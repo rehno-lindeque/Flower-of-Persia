@@ -12,7 +12,7 @@ void main()\n\
   gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\n\
   normal = gl_NormalMatrix * gl_Normal;\n\
   vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\n\
-  vertex_to_light_vector = (vec3)(gl_LightSource[0].position-vertex_in_modelview_space);\n\
+  vertex_to_light_vector = (gl_LightSource[0].position-vertex_in_modelview_space).xyz;\n\
   texcoord = vec2(gl_MultiTexCoord0);\n\
 }";
 
@@ -24,8 +24,8 @@ uniform sampler2D diffuseTexture;\n\
 varying vec3 realcoord;\n\
 void main()\n\
 {\n\
-	const vec4 AmbientColor = vec4(0.0, 0.0, 0.0, 1.0);\n\
-  const vec4 DiffuseColor = texture2D(diffuseTexture, texcoord);\n\
+	vec4 AmbientColor = vec4(0.0, 0.0, 0.0, 1.0);\n\
+  vec4 DiffuseColor = texture2D(diffuseTexture, texcoord);\n\
 	vec3 normalized_normal = normalize(normal);\n\
 	vec3 normalized_vertex_to_light_vector = normalize(vertex_to_light_vector);\n\
   vec4 light_color = clamp(dot(normalized_normal, normalized_vertex_to_light_vector), 0.0, 1.0) * gl_LightSource[0].diffuse;\n\
@@ -42,8 +42,8 @@ void main()\n\
   gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\n\
   normal = gl_NormalMatrix * gl_Normal;\n\
   vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\n\
-  vertex_to_light1 = (vec3)(gl_LightSource[0].position-vertex_in_modelview_space);\n\
-  vertex_to_light2 = (vec3)(gl_LightSource[1].position-vertex_in_modelview_space);\n\
+  vertex_to_light1 = (gl_LightSource[0].position-vertex_in_modelview_space).xyz;\n\
+  vertex_to_light2 = (gl_LightSource[1].position-vertex_in_modelview_space).xyz;\n\
   texcoord = vec2(gl_MultiTexCoord0);\n\
 }";
 
@@ -56,8 +56,8 @@ uniform sampler2D diffuseTexture;\n\
 varying vec3 realcoord;\n\
 void main()\n\
 {\n\
-	const vec4 AmbientColor = vec4(0.0, 0.0, 0.0, 1.0);\n\
-  const vec4 DiffuseColor = texture2D(diffuseTexture, texcoord);\n\
+	vec4 AmbientColor = vec4(0.0, 0.0, 0.0, 1.0);\n\
+  vec4 DiffuseColor = texture2D(diffuseTexture, texcoord);\n\
 	vec3 normalized_normal = normalize(normal);\n\
 	vec3 normalized_vertex_to_light1 = normalize(vertex_to_light1);\n\
   vec3 normalized_vertex_to_light2 = normalize(vertex_to_light2);\n\

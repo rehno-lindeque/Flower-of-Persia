@@ -13,26 +13,26 @@
 */
 
 const char* shadowdepthVertexProgram = 
-"varying vec4 modelViewVertex;"
-"varying vec4 projectedVertex;"
-"void main()"
-"{"
-  // project the vertex 
-" gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;"
-" projectedVertex = gl_Position;"
+"varying vec4 modelViewVertex;\n"
+"varying vec4 projectedVertex;\n"
+"void main()\n"
+"{\n"
+   // project the vertex 
+"  gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\n"
+"  projectedVertex = gl_Position;\n"
   
-  // calculate the vertex in model view space
-  // TODO: can't you just use the z component of glPosition???
-" modelViewVertex = gl_ModelViewMatrix * gl_Vertex;"
+   // calculate the vertex in model view space
+   // TODO: can't you just use the z component of glPosition???
+"  modelViewVertex = gl_ModelViewMatrix * gl_Vertex;\n"
 "}";
 
 const char* shadowdepthFragmentProgram =
-"varying vec4 modelViewVertex;"
-"varying vec4 projectedVertex;"
-"void main()"
-"{"
+"varying vec4 modelViewVertex;\n"
+"varying vec4 projectedVertex;\n"
+"void main()\n"
+"{\n"
    //gl_FragColor = length(modelViewVertex);
-"  gl_FragColor = projectedVertex.z;"
+"  gl_FragColor = vec4(projectedVertex.z);\n"
 "}";
 
 class ShadowdepthShader : public Shader

@@ -239,13 +239,28 @@ void myinit()
   viewCubeShader.build();//*/
 
   // set up shaders
-  floorShader.build();
-  fogShader.build();
-  shadowShader.build();
-  //maskShader.build();
-  railShader.build();
-  clothShader.build();
-  shadowdepthShader.build();//*/
+  cout << "Floor shader" << endl << "------------" <<endl; 
+    floorShader.build(); 
+  cout << "Done" << endl;
+  cout << "Fog shader" << endl << "----------" <<endl; 
+    fogShader.build();
+  cout << "Done" << endl;
+  cout << "Shadow shader" << endl << "-------------" <<endl; 
+    shadowShader.build();
+  cout << "Done" << endl;
+  //cout << "Mask shader" << endl << "-----------" <<endl; 
+  //  maskShader.build();
+  //cout << "Done" << endl;
+  cout << "Rail shader" << endl << "-----------" <<endl; 
+    railShader.build();
+  cout << "Done" << endl;
+  cout << "Cloth shader" << endl << "------------" <<endl; 
+    clothShader.build();
+  cout << "Done" << endl;
+  cout << "Cloth shader" << endl << "------------" <<endl; 
+    shadowdepthShader.build();
+  cout << "Done" << endl;
+  //*/
 
   /*floorShader.setTexture(textures.get(0));
   fogShader.setTexture(textures.get(2));

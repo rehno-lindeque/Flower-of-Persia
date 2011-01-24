@@ -20,15 +20,15 @@ uniform vec3 cameraPosition;"
 {\
   gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\
   color = gl_Color;\
-  const vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\
+  vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\
   vec3 viewDirection = normalize(vec3(vertex_in_modelview_space) - cameraPosition);\
   normal = /*gl_NormalMatrix */ gl_Normal;\
   normal = faceforward(normal, viewDirection, normal);\
   /*?tangent = faceforward(tangent, viewDirection, normal);*/\
   /*?binormal = faceforward(binormal, viewDirection, normal);*/"
   //"normal = gl_Normal;"
-  /*"vec3 vertex_to_light1 = normalize((vec3)(gl_LightSource[0].position-vertex_in_modelview_space));\
-  vec3 vertex_to_light2 = normalize((vec3)(gl_LightSource[1].position-vertex_in_modelview_space));"*/
+  /*"vec3 vertex_to_light1 = normalize((gl_LightSource[0].position-vertex_in_modelview_space).xyz);\
+  vec3 vertex_to_light2 = normalize((gl_LightSource[1].position-vertex_in_modelview_space).xyz);"*/
   "vec3 vertex_to_light1 = vec3(gl_LightSource[0].position-vertex_in_modelview_space);\
   vec3 vertex_to_light2 = vec3(gl_LightSource[1].position-vertex_in_modelview_space);"
   
@@ -89,7 +89,7 @@ uniform sampler2D normalTexture;"
   vec4 light2_specular = vec4(1.3, 1.1, 0.9, 1.0) * pow(max(dot(light2_reflect_direction, normalized_viewDirection), 0.0), 2.0);\
   light1_specular /= gl_LightSource[0].quadraticAttenuation * light1_distance * light1_distance + 1.0;\
   light2_specular /= gl_LightSource[1].quadraticAttenuation * light2_distance * light2_distance + 1.0;\
-  const vec4 specularColor = light1_specular + light2_specular;"
+  vec4 specularColor = light1_specular + light2_specular;"
   
   // compute fragment color
   "gl_FragColor = 1.0*diffuseColor + 0.4*specularColor;"

@@ -15,14 +15,14 @@ void main()\n\
 {\n\
   gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\n\
   color = gl_Color;\n\
-  /*const vec3 viewDirection = vec3(gl_ModelViewMatrix*gl_Vertex - gl_ProjectionMatrixTranspose[3]);*/\n\
-  /*const vec3 viewDirection = vec3( gl_ModelViewMatrix * gl_Vertex);*/\n\
-  const vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\n\
+  /*vec3 viewDirection = vec3(gl_ModelViewMatrix*gl_Vertex - gl_ProjectionMatrixTranspose[3]);*/\n\
+  /*vec3 viewDirection = vec3( gl_ModelViewMatrix * gl_Vertex);*/\n\
+  vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\n\
   viewDirection = normalize(vec3(vertex_in_modelview_space) - cameraPosition);\n\
   normal = gl_NormalMatrix * gl_Normal;\n\
   normal = faceforward(normal, viewDirection, normal);\n\
-  vertex_to_light1 = normalize((vec3)(gl_LightSource[0].position-vertex_in_modelview_space));\n\
-  vertex_to_light2 = normalize((vec3)(gl_LightSource[1].position-vertex_in_modelview_space));\n\
+  vertex_to_light1 = normalize((gl_LightSource[0].position-vertex_in_modelview_space).xyz);\n\
+  vertex_to_light2 = normalize((gl_LightSource[1].position-vertex_in_modelview_space).xyz);\n\
   texcoord = vec2(gl_MultiTexCoord0);\n\
   viewDirection = normalize(vec3(vertex_in_modelview_space) - cameraPosition);\n\
 }";
@@ -63,7 +63,7 @@ void main()\n\
   light2_specular /= max(gl_LightSource[1].quadraticAttenuation * light2_distance * light2_distance, 1.0);\n*/\
   light1_specular /= gl_LightSource[0].quadraticAttenuation * light1_distance * light1_distance + 1.0;\n\
   light2_specular /= gl_LightSource[1].quadraticAttenuation * light2_distance * light2_distance + 1.0;\n\
-  const vec4 specularColor = light1_specular + light2_specular;\n\
+  vec4 specularColor = light1_specular + light2_specular;\n\
   gl_FragColor = 1.0*diffuseColor + 0.2*specularColor;\n\
 }";
 

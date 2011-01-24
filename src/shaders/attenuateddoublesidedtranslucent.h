@@ -16,8 +16,8 @@ const char* qattenuatedDoubleTranslucentVertexProgram2Lights =
 "  gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\n"
 "  color = gl_Color;\n"
 
-"  const vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\n"
-"  const vec3 viewDirection = normalize(vec3(vertex_in_modelview_space) - cameraPosition);\n"
+"  vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\n"
+"  vec3 viewDirection = normalize(vec3(vertex_in_modelview_space) - cameraPosition);\n"
 
 /*"  normal = gl_NormalMatrix * gl_Normal;\n"
 "  normal = faceforward(normal, viewDirection, normal);\n"
@@ -37,7 +37,7 @@ const char* qattenuatedDoubleTranslucentFragmentProgram2Lights =
 
 "void main()\n"
 "{\n"
-"   const vec4 diffuseColor = texture2D(diffuseTexture, texcoord) * color;\n"
+"   vec4 diffuseColor = texture2D(diffuseTexture, texcoord) * color;\n"
 " 	vec3 normalized_normal = normalize(normal);\n"
 " 	vec3 normalized_vertex_to_light1 = normalize(vertex_to_light1);\n"
 "   float light1_distance = length(vertex_to_light1);\n"

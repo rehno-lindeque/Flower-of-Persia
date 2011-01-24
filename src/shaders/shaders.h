@@ -130,19 +130,27 @@ public:
     GLint status;
     glGetShaderiv(vertexShaderObject, GL_COMPILE_STATUS, &status);
     if(status == GL_FALSE)
+    {
+      GLsizei len;
+      glGetShaderInfoLog(vertexShaderObject, 256*8, &len, shaderLog);
       cout << "Failed to compile vertex shader..." << std::endl;
+      cout << vertexShaderProgram << std::endl;
+      cout << shaderLog << std::endl;
+    }
     glGetShaderiv(fragmentShaderObject, GL_COMPILE_STATUS, &status);
     if(status == GL_FALSE)
-      cout << "Failed to compile fragment shader..." << std::endl;
+    {
+      GLsizei len;
+      cout << fragmentShaderProgram << std::endl;
+      glGetShaderInfoLog(fragmentShaderObject, 256*8, &len, shaderLog);
+      cout << shaderLog << std::endl;
+    }
 
     glAttachShader(programObject, vertexShaderObject);
     glAttachShader(programObject, fragmentShaderObject);
 
     glLinkProgram(programObject);
-
-    GLsizei len;
-    glGetShaderInfoLog(vertexShaderObject, 256*8, &len, shaderLog);
-    glGetShaderInfoLog(fragmentShaderObject, 256*8, &len, shaderLog);
+    
   }
 };
 

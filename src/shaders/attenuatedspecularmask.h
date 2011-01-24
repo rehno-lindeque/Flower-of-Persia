@@ -14,14 +14,14 @@ void main()\n\
 {\n\
   gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\n\
   color = gl_Color;\n\
-  /*const vec3 viewDirection = vec3(gl_ModelViewMatrix*gl_Vertex - gl_ProjectionMatrixTranspose[3]);*\n\
-  /*const vec3 viewDirection = vec3( gl_ModelViewMatrix * gl_Vertex);*\n\
-  const vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\n\
+  /*vec3 viewDirection = vec3(gl_ModelViewMatrix*gl_Vertex - gl_ProjectionMatrixTranspose[3]);*\n\
+  /*vec3 viewDirection = vec3( gl_ModelViewMatrix * gl_Vertex);*\n\
+  vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\n\
   viewDirection = normalize(vec3(vertex_in_modelview_space) - cameraPosition);\n\
   normal = gl_NormalMatrix * gl_Normal;\n\
   normal = faceforward(normal, viewDirection, normal);\n\
-  vertex_to_light1 = normalize((vec3)(gl_LightSource[0].position-vertex_in_modelview_space));\n\
-  vertex_to_light2 = normalize((vec3)(gl_LightSource[1].position-vertex_in_modelview_space));\n\
+  vertex_to_light1 = normalize((gl_LightSource[0].position-vertex_in_modelview_space).xyz);\n\
+  vertex_to_light2 = normalize((gl_LightSource[1].position-vertex_in_modelview_space).xyz);\n\
   texcoord = vec2(gl_MultiTexCoord0);\n\
   viewDirection = normalize(vec3(vertex_in_modelview_space) - cameraPosition);\n"
   //transform everything, so that the normal == (0.0, 1.0, 0.0) (for bump-mapping)
@@ -46,12 +46,12 @@ varying vec3 viewDirection;\n"
 {\n\
   gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\n\
   color = gl_Color;\n\
-  const vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\n\
+  vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\n\
   viewDirection = normalize(vec3(vertex_in_modelview_space) - cameraPosition);\n\
   normal = gl_NormalMatrix * gl_Normal;\n\
   normal = faceforward(normal, viewDirection, normal);\n\
-  vertex_to_light1 = normalize((vec3)(gl_LightSource[0].position-vertex_in_modelview_space));\n\
-  vertex_to_light2 = normalize((vec3)(gl_LightSource[1].position-vertex_in_modelview_space));\n\
+  vertex_to_light1 = normalize((gl_LightSource[0].position-vertex_in_modelview_space).xyz);\n\
+  vertex_to_light2 = normalize((gl_LightSource[1].position-vertex_in_modelview_space).xyz);\n\
   texcoord = vec2(gl_MultiTexCoord0);\n\
   viewDirection = normalize(vec3(vertex_in_modelview_space) - cameraPosition);\n\
 }";
@@ -94,7 +94,7 @@ uniform sampler2D normalTexture;"
   vec4 light2_specular = vec4(1.3, 1.1, 0.9, 1.0) * pow(max(dot(light2_reflect_direction, normalized_viewDirection), 0.0), 20.0);\
   light1_specular /= gl_LightSource[0].quadraticAttenuation * light1_distance * light1_distance + 1.0;\
   light2_specular /= gl_LightSource[1].quadraticAttenuation * light2_distance * light2_distance + 1.0;\
-  const vec4 specularColor = light1_specular + light2_specular;"
+  vec4 specularColor = light1_specular + light2_specular;"
   
   // compute fragment color
   "gl_FragColor = 1.0*diffuseColor + 0.2*specularColor;\

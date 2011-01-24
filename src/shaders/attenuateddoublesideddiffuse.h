@@ -13,8 +13,8 @@ void main()\n\
   color = gl_Color;\n\
   normal = gl_NormalMatrix * gl_Normal;\n\
   vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\n\
-  vertex_to_light1 = (vec3)(gl_LightSource[0].position-vertex_in_modelview_space);\n\
-  vertex_to_light2 = (vec3)(gl_LightSource[1].position-vertex_in_modelview_space);\n\
+  vertex_to_light1 = (gl_LightSource[0].position-vertex_in_modelview_space).xyz;\n\
+  vertex_to_light2 = (gl_LightSource[1].position-vertex_in_modelview_space).xyz;\n\
   texcoord = vec2(gl_MultiTexCoord0);\n\
 }";
 
@@ -28,7 +28,7 @@ uniform sampler2D diffuseTexture;\n\
 varying vec4 color;\n\
 void main()\n\
 {\n\
-  const vec4 DiffuseColor = texture2D(diffuseTexture, texcoord) * color;\n\
+  vec4 DiffuseColor = texture2D(diffuseTexture, texcoord) * color;\n\
 	vec3 normalized_normal = normalize(normal);\n\
 	vec3 normalized_vertex_to_light1 = normalize(vertex_to_light1);\n\
   /*vec3 normalized_vertex_to_light2 = normalize(vertex_to_light2);*/\n\
