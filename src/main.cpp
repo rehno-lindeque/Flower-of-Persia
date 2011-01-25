@@ -169,7 +169,7 @@ void myinit()
 	srand(time(&tmp));
 
   //misc
-	glClearColor(0.2f, 0.2f, 0.3f, 0.0f);
+	glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
 	//glClearDepth(0.0f);
 	glEnable(GL_DEPTH_TEST);
   glLineWidth(2.0);
