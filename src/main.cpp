@@ -560,7 +560,7 @@ int main(int argc, char **argv)
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 	myinit();
-  //glutFullScreen();
+  glutFullScreen();
   glutWarpPointer(windowWidth/2, windowHeight/2);
   oldTime = Time::getCounter();
   glutMainLoop();
