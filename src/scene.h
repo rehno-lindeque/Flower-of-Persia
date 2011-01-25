@@ -231,16 +231,15 @@ public:
     arch.render();
     singleDoor.render();
     doubleDoor.render();
-    /* removed4debug: 
+    //* removed4debug: 
     railShader.activate();
-    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    //glEnable(GL_BLEND);
+      //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+      //glEnable(GL_BLEND);
       glActiveTexture(GL_TEXTURE1);
       glEnable(GL_TEXTURE_2D);
       glBindTexture(GL_TEXTURE_2D, textures.get(9));
       glActiveTexture(GL_TEXTURE0);
       glBindTexture(GL_TEXTURE_2D, textures.get(5));
-
       railShader.setCameraPosition(camera.position);
       railing.render();//*/
     //glDisable(GL_BLEND);
@@ -274,13 +273,13 @@ public:
     glColor4f(1.0f, 1.0f, 1.0f, 0.8f);
     if(enableTextures)
       glBindTexture(GL_TEXTURE_2D, textures.get(4));
-      cout <<"render cloth";
+    //cout <<"render cloth";
 
-        clothShader.setCameraPosition(camera.position);
-        glBegin(GL_QUADS);
-          renderCloths();
-        glEnd();
-      FragmentShader::restoreFixedFunction();
+    clothShader.setCameraPosition(camera.position);
+    glBegin(GL_QUADS);
+      renderCloths();
+    glEnd();
+    FragmentShader::restoreFixedFunction();
     glEnable(GL_CULL_FACE);
     glDisable(GL_BLEND);
 
@@ -299,12 +298,12 @@ public:
     if(enableTextures)
       glBindTexture(GL_TEXTURE_2D, textures.get(4));
 
-      clothShader.activate();
-        clothShader.setCameraPosition(camera.position);
-        glBegin(GL_QUADS);
-          renderCloths();
-        glEnd();
-      FragmentShader::restoreFixedFunction();
+    clothShader.activate();
+    clothShader.setCameraPosition(camera.position);
+    glBegin(GL_QUADS);
+      renderCloths();
+    glEnd();
+    FragmentShader::restoreFixedFunction();
     glEnable(GL_CULL_FACE);
     glDisable(GL_BLEND);
   }

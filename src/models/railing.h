@@ -94,11 +94,8 @@ protected:
 public:
   GLuint displayList;
 
-  virtual void build(uint tangentIndex, uint binormalIndex)
+  void renderDirect()
   {
-    Railing::tangentIndex = tangentIndex;
-    Railing::binormalIndex = binormalIndex;
-
     float radius = 5.5;
     float startHeight = 0.0f;
     float rail[6][3] =
@@ -124,40 +121,56 @@ public:
       { 19.0f, platformHeight,-23.0f} };
 
     UVGenerator* oldUVMap = uvMap0;
+
+    glDisable(GL_CULL_FACE); //for the shader
+    glPushMatrix();
+
+    /*glEnable(GL_ALPHA_TEST);
+    glAlphaFunc(GL_GREATER, 0.2f);*/ //turned off so masking can be done in a shader (a good idea?? - maybe not??)
+
+    // geometry
+    glBegin(GL_QUADS);
+      // draw pool railing
+      Y_XZUVGenerator uvGenerator1(1.0f);
+      uvMap0 = &uvGenerator1;
+      extrudeYShape(*rail, 6, 1.0f);
+
+      //draw platform railing
+      Y_XZUVGenerator uvGenerator2(0.5484f);
+      uvMap0 = &uvGenerator2;
+      extrudeYShape((float*)platformRail, 5, 1.5f);
+      extrudeYShape((float*)platformRail2, 5, 1.5f);
+
+      glEnable(GL_CULL_FACE);
+    glEnd();
+
+    glPopMatrix();
+    glEnable(GL_CULL_FACE);
+
+    uvMap0 = oldUVMap;
+  }
+
+  virtual void build(uint tangentIndex, uint binormalIndex)
+  {
+    Railing::tangentIndex = tangentIndex;
+    Railing::binormalIndex = binormalIndex;
+
+    /* Using a display list
+    UVGenerator* oldUVMap = uvMap0;
     displayList = glGenLists(1);
     glNewList(displayList, GL_COMPILE);
-      glDisable(GL_CULL_FACE); //for the shader
-      glPushMatrix();
-
-      /*glEnable(GL_ALPHA_TEST);
-      glAlphaFunc(GL_GREATER, 0.2f);*/ //turned off so masking can be done in a shader (a good idea?? - maybe not??)
-
-      // geometry
-      glBegin(GL_QUADS);
-        // draw pool railing
-        Y_XZUVGenerator uvGenerator1(1.0f);
-        uvMap0 = &uvGenerator1;
-        extrudeYShape(*rail, 6, 1.0f);
-
-        //draw platform railing
-        Y_XZUVGenerator uvGenerator2(0.5484f);
-        uvMap0 = &uvGenerator2;
-        extrudeYShape((float*)platformRail, 5, 1.5f);
-        extrudeYShape((float*)platformRail2, 5, 1.5f);
-
-        glEnable(GL_CULL_FACE);
-      glEnd();
-
-      glPopMatrix();
-      glEnable(GL_CULL_FACE);
+      renderDirect();
     glEndList();
-    uvMap0 = oldUVMap;
+    uvMap0 = oldUVMap;//*/
   }
 
   virtual void render()
   {
-    //draw railing
-    glCallList(displayList);
+    /* Using a display list
+    glCallList(displayList);//*/
+    
+    //* Not using a display list:
+    renderDirect(); //*/
   }
 
   virtual void renderNormals()

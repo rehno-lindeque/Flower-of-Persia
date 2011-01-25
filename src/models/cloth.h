@@ -197,7 +197,6 @@ public:
     // set uv generator
     UVGenerator* oldUVMap = uvMap0;
 
-
     int xstep = 1, xstart = 0, xend = nHorisontalVertices-1;
     if(camera.getLookDirection()(2) > 0.0f) // z looking forward?
     {
@@ -226,7 +225,8 @@ public:
         Vector3 n3 = calcNormal(cx+1, cy+1);
         Vector3 n4 = calcNormal(cx, cy+1);
 
-        /*Vector2 uv1 = Vector2(cx/(float)nHorisontalVertices,     cy/(float)nVerticalVertices);
+        /*
+        Vector2 uv1 = Vector2(cx/(float)nHorisontalVertices,     cy/(float)nVerticalVertices);
         Vector2 uv2 = Vector2((cx+1)/(float)nHorisontalVertices, cy/(float)nVerticalVertices);
         Vector2 uv3 = Vector2((cx+1)/(float)nHorisontalVertices, (cy+1)/(float)nVerticalVertices);
         Vector2 uv4 = Vector2(cx/(float)nHorisontalVertices,     (cy+1)/(float)nVerticalVertices);
@@ -234,12 +234,14 @@ public:
         drawQuadNormUV( n1, uv1, (Vector3)particles[cy*nHorisontalVertices + cx].position,
                         n2, uv2, (Vector3)particles[cy*nHorisontalVertices + cx+1].position,
                         n3, uv3, (Vector3)particles[(cy+1)*nHorisontalVertices + cx+1].position,
-                        n4, uv4, (Vector3)particles[(cy+1)*nHorisontalVertices + cx].position);*/
-        drawQuadNorm( n1, (Vector3)particles[cy*nHorisontalVertices + cx].position,
-                      n2, (Vector3)particles[cy*nHorisontalVertices + cx+1].position,
-                      n3, (Vector3)particles[(cy+1)*nHorisontalVertices + cx+1].position,
-                      n4, (Vector3)particles[(cy+1)*nHorisontalVertices + cx].position);
-        /*drawReverseQuadNormUV(n1, uv1, (Vector3)particles[cy*nHorisontalVertices + cx].position,
+                        n4, uv4, (Vector3)particles[(cy+1)*nHorisontalVertices + cx].position);//*/
+        //*
+        drawQuadNorm( n1, static_cast<Vector3>(particles[cy*nHorisontalVertices + cx].position),
+                      n2, static_cast<Vector3>(particles[cy*nHorisontalVertices + cx+1].position),
+                      n3, static_cast<Vector3>(particles[(cy+1)*nHorisontalVertices + cx+1].position),
+                      n4, static_cast<Vector3>(particles[(cy+1)*nHorisontalVertices + cx].position));//*/
+        /*
+        drawReverseQuadNormUV(n1, uv1, (Vector3)particles[cy*nHorisontalVertices + cx].position,
                               n2, uv2, (Vector3)particles[cy*nHorisontalVertices + cx+1].position,
                               n3, uv3, (Vector3)particles[(cy+1)*nHorisontalVertices + cx+1].position,
                               n4, uv4, (Vector3)particles[(cy+1)*nHorisontalVertices + cx].position);*/
