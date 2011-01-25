@@ -211,14 +211,15 @@ public:
     for(int cy = 0; cy < nVerticalVertices-1; cy++)
       for(int cx = xstart; cx != xend; cx += xstep)
       {
-        /*drawQuad((Vector3)particles[cy*nHorisontalVertices + cx].position,
+        /*
+        drawQuad((Vector3)particles[cy*nHorisontalVertices + cx].position,
                 (Vector3)particles[cy*nHorisontalVertices + cx+1].position,
                 (Vector3)particles[cy*nHorisontalVertices+nHorisontalVertices + cx+1].position,
                 (Vector3)particles[cy*nHorisontalVertices+nHorisontalVertices + cx].position);
         drawReverseQuad((Vector3)particles[cy*nHorisontalVertices + cx].position,
                         (Vector3)particles[cy*nHorisontalVertices + cx+1].position,
                         (Vector3)particles[cy*nHorisontalVertices+nHorisontalVertices + cx+1].position,
-                        (Vector3)particles[cy*nHorisontalVertices+nHorisontalVertices + cx].position);*/
+                        (Vector3)particles[cy*nHorisontalVertices+nHorisontalVertices + cx].position);//*/
 
         Vector3 n1 = calcNormal(cx, cy);
         Vector3 n2 = calcNormal(cx+1, cy);
@@ -240,6 +241,14 @@ public:
                       n2, static_cast<Vector3>(particles[cy*nHorisontalVertices + cx+1].position),
                       n3, static_cast<Vector3>(particles[(cy+1)*nHorisontalVertices + cx+1].position),
                       n4, static_cast<Vector3>(particles[(cy+1)*nHorisontalVertices + cx].position));//*/
+
+        //double *p = particles[cy*nHorisontalVertices + cx].position;
+        //cout << '{' << p[0] << ' ' << p[1] << ' ' << p[2] << '}' << endl;
+        /*
+        drawQuadNorm( n1, Vector3(-10.0, -10.0, 0.0),
+                      n2, Vector3( 10.0, -10.0, 0.0),
+                      n3, Vector3( 10.0,  10.0, 0.0),
+                      n4, Vector3(-10.0,  10.0, 0.0));//*/
         /*
         drawReverseQuadNormUV(n1, uv1, (Vector3)particles[cy*nHorisontalVertices + cx].position,
                               n2, uv2, (Vector3)particles[cy*nHorisontalVertices + cx+1].position,
@@ -270,6 +279,9 @@ public:
 
   void update(double time)
   {
+    /*
+    static int i = 0;//*/
+
     time /= 10.0;
 
     // compute forces on particles
@@ -303,12 +315,25 @@ public:
         particles[c].acceleration = particles[c].force / particles[c].mass;
 
         // move particles
-          // calculate velocity
-          particles[c].velocity += particles[c].acceleration*time;
+        // calculate velocity
+        particles[c].velocity += particles[c].acceleration*time;
 
-          // calculate position
-          particles[c].position += particles[c].velocity*time;
+        /* 
+        if (i == 0)
+        {
+          double *p = particles[c].velocity;
+          cout << '{' << p[0] << ' ' << p[1] << ' ' << p[2] << '}' << endl;
+          cout << '[' << time << ']' << endl;
+        }//*/
+
+        // calculate position
+        particles[c].position += particles[c].velocity*time;
+       
+
       }
+
+    /*
+    i =1;//*/
   }
 
   ~Cloth()

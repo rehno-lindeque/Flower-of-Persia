@@ -73,9 +73,31 @@ public:
 
   void renderCloths()
   {
+    //glDepthMask(GL_FALSE);
+
+    clothShader.activate();
+    //glDisable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glDisable(GL_CULL_FACE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glColor4f(1.0f, 1.0f, 1.0f, 0.8f);
+    if(enableTextures)
+      glBindTexture(GL_TEXTURE_2D, textures.get(4));
+    clothShader.setCameraPosition(camera.position);
+    glBegin(GL_QUADS);
+
+
     cloths.sort(comp_model_distance());
     for(std::list<Cloth*>::iterator i = cloths.begin(); i != cloths.end(); i++)
       (*i)->render();
+
+
+    glEnd();
+    FragmentShader::restoreFixedFunction();
+    glEnable(GL_CULL_FACE);
+    glDisable(GL_BLEND);
+    
+    //glDepthMask(GL_TRUE);
   }
 
   void renderEnv()
@@ -231,18 +253,14 @@ public:
     arch.render();
     singleDoor.render();
     doubleDoor.render();
-    //* removed4debug: 
     railShader.activate();
-      //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-      //glEnable(GL_BLEND);
       glActiveTexture(GL_TEXTURE1);
       glEnable(GL_TEXTURE_2D);
       glBindTexture(GL_TEXTURE_2D, textures.get(9));
       glActiveTexture(GL_TEXTURE0);
       glBindTexture(GL_TEXTURE_2D, textures.get(5));
       railShader.setCameraPosition(camera.position);
-      railing.render();//*/
-    //glDisable(GL_BLEND);
+      railing.render();
     fogShader.activate();
     pool.renderBottom();
     
@@ -267,21 +285,7 @@ public:
   if(camera.position(2) > -8.0)
   {
     // render cloths
-    glEnable(GL_BLEND);
-    glDisable(GL_CULL_FACE);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glColor4f(1.0f, 1.0f, 1.0f, 0.8f);
-    if(enableTextures)
-      glBindTexture(GL_TEXTURE_2D, textures.get(4));
-    //cout <<"render cloth";
-
-    clothShader.setCameraPosition(camera.position);
-    glBegin(GL_QUADS);
-      renderCloths();
-    glEnd();
-    FragmentShader::restoreFixedFunction();
-    glEnable(GL_CULL_FACE);
-    glDisable(GL_BLEND);
+    renderCloths();
 
     pool.renderWater();
   }
@@ -291,21 +295,7 @@ public:
     pool.renderWater();
 
     // render cloths
-    glEnable(GL_BLEND);
-    glDisable(GL_CULL_FACE);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glColor4f(1.0f, 1.0f, 1.0f, 0.8f);
-    if(enableTextures)
-      glBindTexture(GL_TEXTURE_2D, textures.get(4));
-
-    clothShader.activate();
-    clothShader.setCameraPosition(camera.position);
-    glBegin(GL_QUADS);
-      renderCloths();
-    glEnd();
-    FragmentShader::restoreFixedFunction();
-    glEnable(GL_CULL_FACE);
-    glDisable(GL_BLEND);
+    renderCloths();
   }
 
     /* render normals */

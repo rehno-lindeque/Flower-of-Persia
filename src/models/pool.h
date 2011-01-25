@@ -1,7 +1,7 @@
 #ifndef __POOL_H__
 #define __POOL_H__
 
-//#define USE_DISPLAYLISTS
+#define USE_DISPLAYLISTS
 
 class Pool : public Model
 {

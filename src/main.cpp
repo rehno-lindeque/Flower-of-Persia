@@ -366,6 +366,8 @@ void idle(void)
   float frameTime = ((uint32)(currentTime - oldTime)) / (double)Time::getFrequency();
   oldTime = currentTime;
 
+  //cout << "time: " << frameTime << std::endl;
+
   if(frameTime > 0.0f)
     fps = 1.0/frameTime;
   else

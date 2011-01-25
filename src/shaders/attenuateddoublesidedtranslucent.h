@@ -17,13 +17,14 @@ const char* qattenuatedDoubleTranslucentVertexProgram2Lights =
 "  color = gl_Color;\n"
 
 "  vec4 vertex_in_modelview_space = gl_ModelViewMatrix * gl_Vertex;\n"
-"  vec3 viewDirection = normalize(vec3(vertex_in_modelview_space) - cameraPosition);\n"
+"  vec3 viewDirection = normalize(vertex_in_modelview_space.xyz - cameraPosition);\n"
 
-/*"  normal = gl_NormalMatrix * gl_Normal;\n"
+//*
+"  normal = gl_NormalMatrix * gl_Normal;\n"
 "  normal = faceforward(normal, viewDirection, normal);\n"
 "  vertex_to_light1 = vec3(gl_LightSource[0].position-vertex_in_modelview_space);\n"
 "  vertex_to_light2 = vec3(gl_LightSource[1].position-vertex_in_modelview_space);\n"
-"  texcoord = vec2(gl_MultiTexCoord0);\n"*/
+"  texcoord = vec2(gl_MultiTexCoord0);\n"//*/
 "}";
 
 // this takes the diffuse color into account (multiplies it with the tex)
@@ -37,15 +38,18 @@ const char* qattenuatedDoubleTranslucentFragmentProgram2Lights =
 
 "void main()\n"
 "{\n"
-"   vec4 diffuseColor = texture2D(diffuseTexture, texcoord) * color;\n"
-" 	vec3 normalized_normal = normalize(normal);\n"
-" 	vec3 normalized_vertex_to_light1 = normalize(vertex_to_light1);\n"
-"   float light1_distance = length(vertex_to_light1);\n"
+//*
+"  vec4 diffuseColor = texture2D(diffuseTexture, texcoord) * color;\n"
+"  vec3 normalized_normal = normalize(normal);\n"
+"  vec3 normalized_vertex_to_light1 = normalize(vertex_to_light1);\n"
+"  float light1_distance = length(vertex_to_light1);\n"
   
-"   vec4 light1_diffuse = (clamp(dot(normalized_normal, normalized_vertex_to_light1), 0.0, 1.0) + (1.0-diffuseColor.a) * clamp(dot(-normalized_normal, normalized_vertex_to_light1), 0.0, 1.0)) * gl_LightSource[0].diffuse;\n"
-"   light1_diffuse /= max(gl_LightSource[0].quadraticAttenuation * light1_distance * light1_distance, 1.0);\n"
-"   light1_diffuse.a = 1.0;\n"
-"   gl_FragColor = diffuseColor * (light1_diffuse);\n"
+"  vec4 light1_diffuse = (clamp(dot(normalized_normal, normalized_vertex_to_light1), 0.0, 1.0) + (1.0-diffuseColor.a) * clamp(dot(-normalized_normal, normalized_vertex_to_light1), 0.0, 1.0)) * gl_LightSource[0].diffuse;\n"
+"  light1_diffuse /= max(gl_LightSource[0].quadraticAttenuation * light1_distance * light1_distance, 1.0);\n"
+"  light1_diffuse.a = 1.0;\n"
+"  gl_FragColor = diffuseColor * (light1_diffuse);\n"//*/
+/*
+"  gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);\n"//*/
 "}";
 
 template<int lights = 2, Attenuation attenuation = QUADRATIC>
