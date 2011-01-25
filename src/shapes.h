@@ -98,6 +98,20 @@ void drawReverseQuad(float* point1, float* point2, float* point3, float* point4)
   glNormal3fv(nv); drawVertex3fv(point1);
 }
 
+void drawQuadUV(float* point1, float* uv1, float* point2, float* uv2, float* point3, float* uv3, float* point4, float* uv4)
+{
+  // calculate normal
+  Vector3 v1 = (Vector3)point2-(Vector3)point1;
+  Vector3 v2 = (Vector3)point4-(Vector3)point1;
+  Vector3 nv = Vector3::cross(v1, v2).normalize();
+
+  // draw
+  glTexCoord2fv(uv1); glNormal3fv(nv); drawVertex3fv(point1);
+  glTexCoord2fv(uv2); glNormal3fv(nv); drawVertex3fv(point2);
+  glTexCoord2fv(uv3); glNormal3fv(nv); drawVertex3fv(point3);
+  glTexCoord2fv(uv4); glNormal3fv(nv); drawVertex3fv(point4);
+}
+
 void drawQuads(float* floor, uint nQuads)
 {
   for(uint c = 0; c < nQuads; c++)

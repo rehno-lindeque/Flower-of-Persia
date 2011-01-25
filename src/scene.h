@@ -104,11 +104,56 @@ public:
   {
     //*removed4debug:
     //glClearColor(0.0, 0.2, 1.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST);
+    glDepthMask(GL_TRUE);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // floor shader    
+    floorShader.activate();    
+    floorShader.setTexture(0);    // bind color texture to texture unit #0
+    floorShader.setShadowmap(2);  // bind shadow map to texture unit #2
+    glActiveTexture(GL_TEXTURE2);
+    glEnable(GL_TEXTURE_CUBE_MAP);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, light0Shadowmap.getTexture());
+    glActiveTexture(GL_TEXTURE0);
+
     pillar.render();
     pot.render();
+    glBindTexture(GL_TEXTURE_2D, textures.get(0));
+    pool.render();
     portal.render();
-    arch.render();//*/
+    walls.render();
+    roomFloor.render();
+    steps.render();
+    roof.render();
+    arch.render();
+    singleDoor.render();
+    doubleDoor.render();
+
+    //*
+    railShader.activate();
+      glActiveTexture(GL_TEXTURE1);
+      glEnable(GL_TEXTURE_2D);
+      glBindTexture(GL_TEXTURE_2D, textures.get(9));
+      glActiveTexture(GL_TEXTURE0);
+      glBindTexture(GL_TEXTURE_2D, textures.get(5));
+      railShader.setCameraPosition(camera.position);
+      railing.render();//*/
+    fogShader.activate();
+    pool.renderBottom();
+    //*/
+
+    shadowShader.activate();
+    shadowShader.setTexture(0);
+    shadowShader.setShadowTexture(1);
+    glActiveTexture(GL_TEXTURE0); //multi-texturing
+    glBindTexture(GL_TEXTURE_2D, textures.get(7));
+    glActiveTexture(GL_TEXTURE1); //multi-texturing
+    glBindTexture(GL_TEXTURE_2D, textures.get(8));
+    roomFloor.renderPlatforms();
+
+    renderCloths();
+    pool.renderWater();
   }
 
   void render()
@@ -125,35 +170,35 @@ public:
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();
-    glRotatef(180.0, 0.0, 0.0, 1.0);
+    //glRotatef(180.0, 0.0, 0.0, 1.0);
     gluPerspective(90.0, 1.0, 0.01, 500.0);
     //glTranslatef(0.0, tempH, 0.0);
     glViewport(0, 0, 512, 512);
 
     //glMatrixMode(GL_MODELVIEW);
     viewCubeCubemap.bind();
-    viewCubeRenderFrame.bind(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
-      renderEnv();
     viewCubeRenderFrame.bind(GL_TEXTURE_CUBE_MAP_POSITIVE_X);
       glRotatef(90.0, 0.0, 1.0, 0.0);
       renderEnv();
-    viewCubeRenderFrame.bind(GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
-      glRotatef(90.0, 0.0, 1.0, 0.0);
-      renderEnv();
     viewCubeRenderFrame.bind(GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
-      glRotatef(90.0, 0.0, 1.0, 0.0);
+      glRotatef(180.0, 0.0, 1.0, 0.0);
       renderEnv();
     viewCubeRenderFrame.bind(GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
-      /*glLoadIdentity();
-      glRotatef(180.0, 0.0, 0.0, 1.0);
-      gluPerspective(90.0, 1.0, 0.01, 500.0);
-      glTranslatef(0.0, tempH, 0.0);
-      glRotatef(180.0, 0.0, 1.0, 0.0);
-      glRotatef(90.0, 1.0, 0.0, 0.0);*/
       //glRotatef(180.0, 0.0, 1.0, 0.0);
       //glRotatef(90.0, 0.0, 1.0, 0.0);
-      glRotatef(90.0, 0.0, 0.0, 1.0);
-      glRotatef(-90.0, 0.0, 1.0, 0.0);
+      //glRotatef(90.0, 0.0, 0.0, 1.0);
+      //glRotatef(-90.0, 0.0, 1.0, 0.0);
+      glRotatef(-90.0, 0.0, 0.0, 1.0);
+      glRotatef(90.0, 0.0, 1.0, 0.0);
+      renderEnv();
+    viewCubeRenderFrame.bind(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
+      glRotatef(180.0, 1.0, 0.0, 0.0);
+      renderEnv();
+    viewCubeRenderFrame.bind(GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
+      glRotatef(90.0, 1.0, 0.0, 0.0);
+      renderEnv();
+    viewCubeRenderFrame.bind(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
+      glRotatef(180.0, 0.0, 1.0, 0.0);
       renderEnv();
     viewCubeRenderFrame.unbind();
     //glMatrixMode(GL_PROJECTION);

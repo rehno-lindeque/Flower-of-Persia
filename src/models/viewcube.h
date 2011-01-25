@@ -41,7 +41,7 @@ public:
   virtual void render()
   {
     glBegin(GL_QUADS);
-      drawBox(Vector3(0.0, 0.0, 0.0), 2.0);
+      drawBox(Vector3(0.0, 0.0, 0.0), 1.0);
     glEnd();
   }
 
