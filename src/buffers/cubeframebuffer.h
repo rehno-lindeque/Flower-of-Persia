@@ -7,11 +7,13 @@ class CubeFrameBuffer : public FrameBuffer
 {
 protected:
   GLuint attachTexture;
+  GLuint attachDepthTexture;
 public:
   inline CubeFrameBuffer() : attachTexture(0) {}
-  void create(GLuint attachTexture)
+  void create(GLuint attachTexture, GLuint attachDepthTexture)
   {
     CubeFrameBuffer::attachTexture = attachTexture;
+    CubeFrameBuffer::attachDepthTexture = attachDepthTexture;
     glGenFramebuffersEXT(1, &frameBufferObject);
   }
 
@@ -19,6 +21,7 @@ public:
   {
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, frameBufferObject);
     glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, textargetCubeFace, attachTexture, 0);
+    glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, textargetCubeFace, attachDepthTexture, 0);
   }
 };
 

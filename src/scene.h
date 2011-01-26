@@ -106,6 +106,7 @@ public:
     //glClearColor(0.0, 0.2, 1.0, 0.0);
     glEnable(GL_DEPTH_TEST);
     glDepthMask(GL_TRUE);
+    //glDepthFunc(GL_GREATER);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // floor shader    
@@ -154,6 +155,8 @@ public:
 
     renderCloths();
     pool.renderWater();
+
+    //glDepthFunc(GL_LESS);
   }
 
   void render()

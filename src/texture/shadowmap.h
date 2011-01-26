@@ -1,7 +1,7 @@
-#ifndef __SHADOWMAP_H__
-#define __SHADOWMAP_H__
+#ifndef __DEPTHCUBEMAP_H__
+#define __DEPTHCUBEMAP_H__
 
-class Shadowmap : public Cubemap
+class DepthCubemap : public Cubemap
 {
 public:
   /*void setRenderTarget()
