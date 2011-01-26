@@ -318,6 +318,8 @@ void keyInput(unsigned char key, int x, int y)
   case 'f': camera.followDistance += 0.5; break;
   case 'r': if(camera.followDistance > 0.5f) camera.followDistance -= 0.5; break;
   case 'm': enableMouse = !enableMouse;
+    glutWarpPointer(windowWidth/2, windowHeight/2);
+    mouse.x = mouse.y = 0;
 	}
 }
 
@@ -355,8 +357,11 @@ void idle(void)
   }
 
   // handle mouse input
-  camera.yawLeftRight(mouse.x/5.0f);
-  camera.pitchUpDown(mouse.y/5.0f);
+  if(enableMouse)
+  {
+    camera.yawLeftRight(mouse.x/5.0f);
+    camera.pitchUpDown(mouse.y/5.0f);
+  }
   mouse.x = mouse.y = 0;
   //*removed4debug: 
   if(!enableMouse)
@@ -561,7 +566,7 @@ int main(int argc, char **argv)
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 	myinit();
-  glutFullScreen();
+  //glutFullScreen();
   glutWarpPointer(windowWidth/2, windowHeight/2);
   oldTime = Time::getCounter();
   glutMainLoop();
