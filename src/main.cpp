@@ -88,7 +88,7 @@ float tempH = 0.0f;
 CubemapProjectShader viewCubeShader;
 ViewCube viewCube;
 Cubemap viewCubeCubemap;
-DepthCubemap viewCubeDepthmap;
+//DepthCubemap viewCubeDepthmap;
 CubeFrameBuffer viewCubeRenderFrame;//*/
 
 
@@ -236,7 +236,7 @@ void myinit()
   //viewCubeCubemap.build(GL_RGBA, GL_RGBA, GL_FLOAT); //  WRONG!!
   //viewCubeCubemap.build(GL_RGB16\32F_ARB, GL_FLOAT); // requires GL_ARB_texture_float extension
   viewCubeCubemap.build(GL_RGBA16F_ARB, GL_RGBA, GL_FLOAT); // requires GL_ARB_texture_float extension
-  viewCubeRenderFrame.create(viewCubeCubemap.getTexture(), viewCubeDepthmap.getTexture());
+  viewCubeRenderFrame.create(viewCubeCubemap.getTexture()/*, viewCubeDepthmap.getTexture()*/);
   viewCubeShader.build();//*/
 
   // set up shaders
