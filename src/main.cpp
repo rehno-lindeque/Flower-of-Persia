@@ -357,7 +357,7 @@ void idle(void)
   }
 
   // handle mouse input
-  if(enableMouse)
+  if(!enableMouse)
   {
     camera.yawLeftRight(mouse.x/5.0f);
     camera.pitchUpDown(mouse.y/5.0f);
