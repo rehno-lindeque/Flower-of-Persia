@@ -16,7 +16,8 @@
 //#define ANTIALIAS
 
 // constants
-GLint windowWidth = 1280, windowHeight = 1024; // Window dimensions
+//GLint windowWidth = 1280, windowHeight = 1024; // Window dimensions
+GLint windowWidth = 1024, windowHeight = 768; // Window dimensions
 const int RANGE_MULTIPLIER = 1;
 const float WORLD_RANGE = 20.0 * RANGE_MULTIPLIER;
 const int Textures::N_TEXTURES = 10;
@@ -538,7 +539,7 @@ int main(int argc, char **argv)
   #endif
 #endif
   glutInitWindowSize(windowWidth, windowHeight);
-  glutCreateWindow("23123576 Rehno Lindeque");
+  glutCreateWindow("Flower of Persia Demo (by Rehno Lindeque)");
   if(glewInit() != GLEW_OK)
     return 1;
 
